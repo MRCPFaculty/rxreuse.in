@@ -13,3 +13,6 @@ python manage.py migrate
 
 # Create superuser using management command
 python manage.py initadmin
+
+# Seed initial blog posts
+python manage.py seedblog
