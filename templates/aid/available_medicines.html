@@ -1,18 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="row mb-5">
+    <div class="col-12 text-center">
+        <h1 class="display-4 fw-bold mb-3">Available Medicines</h1>
+        <p class="lead text-secondary">Browse our inventory of verified medicines available for those in need</p>
+    </div>
+</div>
+
 <div class="row">
-    </p>
-</div>
-<div class="card-footer bg-transparent">
-    <span class="badge bg-success">Available</span>
-</div>
-</div>
-</div>
-{% empty %}
-<div class="col-12">
-    <div class="alert alert-warning">No medicines available in stock right now. Please check back later.</div>
-</div>
-{% endfor %}
+    {% for medicine in medicines %}
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">{{ medicine.medicine_name }}</h5>
+                <p class="text-secondary mb-2"><strong>Quantity:</strong> {{ medicine.quantity }}</p>
+                <p class="text-secondary mb-2"><strong>Expires:</strong> {{ medicine.expiry_date|date:"M Y" }}</p>
+                <p class="text-secondary mb-3"><strong>From:</strong> {{ medicine.donation.donor_name }}</p>
+                <a href="{% url 'apply_for_aid' %}" class="btn btn-primary w-100">Request This Medicine</a>
+            </div>
+            <div class="card-footer bg-transparent">
+                <span class="badge bg-success">Available</span>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <div class="alert alert-info text-center">
+            <h4>No medicines available right now</h4>
+            <p class="mb-0">Please check back later or contact us for more information.</p>
+        </div>
+    </div>
+    {% endfor %}
 </div>
 {% endblock %}
