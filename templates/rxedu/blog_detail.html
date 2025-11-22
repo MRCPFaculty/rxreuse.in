@@ -6,22 +6,243 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{% url 'rxedu_home' %}">RxEdu</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{ post.title }}</li>
-            </ol>
-        </nav>
+                {% extends 'base.html' %}
+                {% load static %}
 
-        <h1 class="mb-3">{{ post.title }}</h1>
-        <p class="text-muted">
-            Published on {{ post.published_date|date:"F d, Y" }} by {{ post.author.email }}
-        </p>
+                {% block content %}
+                <div class="row">
+                    <!-- Main Content -->
+                    <div class="col-lg-8">
+                        <!-- Article Header -->
+                        <article class="mb-5">
+                            <div class="mb-4">
+                                <h1 class="display-4 fw-bold mb-3">{{ post.title }}</h1>
 
-        {% if post.image %}
-        <img src="{{ post.image.url }}" class="img-fluid rounded mb-4" alt="{{ post.title }}">
-        {% endif %}
+                                <!-- Meta Info -->
+                                <div class="d-flex align-items-center mb-4 text-secondary">
+                                    <div class="d-flex align-items-center me-4">
+                                        <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center text-white fw-bold me-2"
+                                            style="width: 40px; height: 40px;">
+                                            {{ post.author.email|slice:":1"|upper }}
+                                        </div>
+                                        <div>
+                                            <div class="text-white small">{{ post.author.email }}</div>
+                                            <div class="small">{{ post.published_date|date:"F d, Y" }}</div>
+                                        </div>
+                                    </div>
 
-        <div class="article-content">
-            {{ post.content|linebreaks }}
-        </div>
-    </div>
-</div>
-{% endblock %}
+                                    <div class="ms-auto">
+                                        <span class="badge bg-dark-glass border border-secondary text-pink">
+                                            {{ post.published_date|date:"F Y" }}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Featured Image -->
+                                {% if post.image %}
+                                <div class="mb-4 overflow-hidden" style="border-radius: 16px;">
+                                    <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid w-100"
+                                        style="max-height: 500px; object-fit: cover;">
+                                </div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Article Content -->
+                            <div class="article-content">
+                                {{ post.content|safe }}
+                            </div>
+
+                            <!-- Tags & Share -->
+                            <div class="mt-5 pt-4 border-top border-secondary">
+                                <div class="d-flex justify-content-between align-items-center flex-wrap">
+                                    <div class="mb-2">
+                                        <span class="badge bg-dark-glass text-warning me-2">Medicine Donation</span>
+                                        <span class="badge bg-dark-glass text-info me-2">Healthcare</span>
+                                        <span class="badge bg-dark-glass text-success">NGO</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-secondary me-2">Share:</span>
+                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
+                                            target="_blank" class="btn btn-sm btn-outline-light me-2">FB</a>
+                                        <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ post.title }}"
+                                            target="_blank" class="btn btn-sm btn-outline-light me-2">TW</a>
+                                        <a href="https://www.linkedin.com/shareArticle?url={{ request.build_absolute_uri }}"
+                                            target="_blank" class="btn btn-sm btn-outline-light">IN</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <div class="col-lg-4">
+                        <!-- Search -->
+                        <div class="card mb-4 p-4">
+                            <h5 class="fw-bold mb-3">Search Articles</h5>
+                            <form action="{% url 'rxedu_home' %}" method="get">
+                                <div class="input-group">
+                                    <input type="text" name="q" class="form-control" placeholder="Search..."
+                                        style="background: rgba(0,0,0,0.2); border-color: rgba(255,255,255,0.1); color: white;">
+                                    <button class="btn btn-primary" type="submit">Go</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Most Popular -->
+                        <div class="card mb-4 p-4">
+                            <h5 class="fw-bold mb-4">Most Popular</h5>
+                            {% for latest_post in latest_posts %}
+                            <div class="mb-3 pb-3 {% if not forloop.last %}border-bottom border-secondary{% endif %}">
+                                <a href="{% url 'blog_detail' latest_post.slug %}" class="text-decoration-none">
+                                    <div class="d-flex">
+                                        {% if latest_post.image %}
+                                        <img src="{{ latest_post.image.url }}" alt="{{ latest_post.title }}"
+                                            class="rounded me-3" style="width: 60px; height: 60px; object-fit: cover;">
+                                        {% else %}
+                                        <div class="bg-dark d-flex align-items-center justify-content-center rounded me-3"
+                                            style="width: 60px; height: 60px; min-width: 60px;">
+                                            <span>📝</span>
+                                        </div>
+                                        {% endif %}
+                                        <div>
+                                            <h6 class="text-white mb-1 small">{{ latest_post.title|truncatewords:8 }}
+                                            </h6>
+                                            <p class="text-secondary mb-0" style="font-size: 0.75rem;">{{
+                                                latest_post.published_date|date:"M d, Y" }}</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            {% empty %}
+                            <p class="text-secondary small">No other articles yet.</p>
+                            {% endfor %}
+                        </div>
+
+                        <!-- Categories -->
+                        <div class="card mb-4 p-4">
+                            <h5 class="fw-bold mb-4">Categories</h5>
+                            <div class="d-flex flex-wrap gap-2">
+                                <a href="{% url 'rxedu_home' %}"
+                                    class="badge bg-dark-glass text-white text-decoration-none py-2 px-3">Medicine
+                                    Donation</a>
+                                <a href="{% url 'rxedu_home' %}"
+                                    class="badge bg-dark-glass text-white text-decoration-none py-2 px-3">Healthcare</a>
+                                <a href="{% url 'rxedu_home' %}"
+                                    class="badge bg-dark-glass text-white text-decoration-none py-2 px-3">NGO</a>
+                                <a href="{% url 'rxedu_home' %}"
+                                    class="badge bg-dark-glass text-white text-decoration-none py-2 px-3">Patient
+                                    Aid</a>
+                                <a href="{% url 'rxedu_home' %}"
+                                    class="badge bg-dark-glass text-white text-decoration-none py-2 px-3">Community
+                                    Health</a>
+                            </div>
+                        </div>
+
+                        <!-- Newsletter -->
+                        <div class="card mb-4 p-4" style="background: var(--gradient-primary);">
+                            <h5 class="fw-bold mb-3 text-white">Stay Updated</h5>
+                            <p class="small text-white mb-3">Subscribe to receive news about medicine donation and
+                                healthcare accessibility.</p>
+                            <form>
+                                <div class="mb-2">
+                                    <input type="email" class="form-control" placeholder="Your Email"
+                                        style="background: rgba(255,255,255,0.9); border: none;">
+                                </div>
+                                <button type="submit" class="btn btn-dark w-100">Subscribe</button>
+                            </form>
+                        </div>
+
+                        <!-- Quick Links -->
+                        <div class="card p-4">
+                            <h5 class="fw-bold mb-3">Quick Links</h5>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><a href="{% url 'donate_medicine' %}"
+                                        class="text-secondary text-decoration-none">→ Donate Medicine</a></li>
+                                <li class="mb-2"><a href="{% url 'available_medicines' %}"
+                                        class="text-secondary text-decoration-none">→ Get Free Medicine</a></li>
+                                <li class="mb-2"><a href="{% url 'success_stories' %}"
+                                        class="text-secondary text-decoration-none">→ Success Stories</a></li>
+                                <li class="mb-2"><a href="{% url 'transparency_hub' %}"
+                                        class="text-secondary text-decoration-none">→ Transparency Hub</a></li>
+                                <li><a href="{% url 'about' %}" class="text-secondary text-decoration-none">→ About
+                                        RxReuse</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <style>
+                    .article-content {
+                        font-size: 1.1rem;
+                        line-height: 1.8;
+                    }
+
+                    .article-content h2 {
+                        font-weight: 700;
+                        margin-top: 2rem;
+                        margin-bottom: 1rem;
+                        color: var(--text-primary);
+                    }
+
+                    .article-content h3,
+                    .article-content h4 {
+                        font-weight: 600;
+                        margin-top: 1.5rem;
+                        margin-bottom: 0.75rem;
+                        color: var(--text-primary);
+                    }
+
+                    .article-content p {
+                        margin-bottom: 1.25rem;
+                        color: var(--text-secondary);
+                    }
+
+                    .article-content ul,
+                    .article-content ol {
+                        margin-bottom: 1.5rem;
+                        padding-left: 1.5rem;
+                    }
+
+                    .article-content li {
+                        margin-bottom: 0.5rem;
+                        color: var(--text-secondary);
+                    }
+
+                    .article-content a {
+                        color: var(--accent-pink);
+                        text-decoration: underline;
+                    }
+
+                    .article-content a:hover {
+                        color: var(--accent-yellow);
+                    }
+
+                    .article-content strong {
+                        color: var(--text-primary);
+                        font-weight: 600;
+                    }
+
+                    .article-content blockquote {
+                        border-left: 4px solid var(--accent-pink);
+                        padding-left: 1.5rem;
+                        margin: 1.5rem 0;
+                        font-style: italic;
+                        color: var(--text-secondary);
+                    }
+
+                    .article-content img {
+                        max-width: 100%;
+                        height: auto;
+                        border-radius: 12px;
+                        margin: 1.5rem 0;
+                    }
+
+                    .article-content code {
+                        background: rgba(238, 85, 134, 0.1);
+                        padding: 0.2rem 0.4rem;
+                        border-radius: 4px;
+                        color: var(--accent-pink);
+                        font-size: 0.9em;
+                    }
+                </style>
+                {% endblock %}
