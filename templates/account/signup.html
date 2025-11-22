@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row justify-content-center min-vh-75 align-items-center">
+    <div class="col-lg-10">
+        <div class="row card p-0 overflow-hidden" style="border-radius: 20px;">
+            <!-- Left Side - Branding -->
+            <div class="col-md-6 p-5 d-flex flex-column justify-content-center"
+                style="background: var(--gradient-primary);">
+                <div class="text-white">
+                    <h2 class="fw-bold mb-4">Start Making an Impact</h2>
+                    <p class="mb-4">Create your free account and join thousands of donors and beneficiaries.</p>
+                    <ul class="list-unstyled">
+                        <li class="mb-3">
+                            <span class="me-2">🎯</span>
+                            <strong>Choose your role</strong> - Donor, Beneficiary, or Volunteer
+                        </li>
+                        <li class="mb-3">
+                            <span class="me-2">💊</span>
+                            <strong>Donate or Request</strong> medicines securely
+                        </li>
+                        <li class="mb-3">
+                            <span class="me-2">📊</span>
+                            <strong>Track your journey</strong> with our dashboard
+                        </li>
+                        <li class="mb-3">
+                            <span class="me-2">🏆</span>
+                            <strong>Earn badges</strong> for your contributions
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Right Side - Signup Form -->
+            <div class="col-md-6 p-5">
+                <h3 class="fw-bold mb-2">Create New Account</h3>
+                <p class="text-secondary mb-4">Join us in making healthcare accessible to all.</p>
+
+                {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {{ form.non_field_errors }}
+                </div>
+                {% endif %}
+
+                <form method="post" action="{% url 'account_signup' %}">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label class="form-label text-secondary">Email Address</label>
+                        <input type="email" name="email" class="form-control form-control-lg"
+                            placeholder="your@email.com" required value="{{ form.email.value|default:'' }}"
+                            style="background: rgba(0,0,0,0.2); border-color: rgba(255,255,255,0.1); color: white;">
+                        {% if form.email.errors %}
+                        <div class="text-danger small mt-1">{{ form.email.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label text-secondary">Password</label>
+                        <input type="password" name="password1" class="form-control form-control-lg"
+                            placeholder="••••••••" required
+                            style="background: rgba(0,0,0,0.2); border-color: rgba(255,255,255,0.1); color: white;">
+                        {% if form.password1.errors %}
+                        <div class="text-danger small mt-1">{{ form.password1.errors }}</div>
+                        {% endif %}
+                        <div class="text-secondary small mt-1">At least 8 characters</div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label text-secondary">Confirm Password</label>
+                        <input type="password" name="password2" class="form-control form-control-lg"
+                            placeholder="••••••••" required
+                            style="background: rgba(0,0,0,0.2); border-color: rgba(255,255,255,0.1); color: white;">
+                        {% if form.password2.errors %}
+                        <div class="text-danger small mt-1">{{ form.password2.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg w-100 mb-3">Create Account</button>
+
+                    <div class="text-center">
+                        <span class="text-secondary">Already have an account? </span>
+                        <a href="{% url 'account_login' %}" class="text-pink text-decoration-none fw-bold">Login</a>
+                    </div>
+                </form>
+
+                <div class="text-center mt-4 pt-4 border-top border-secondary">
+                    <p class="text-secondary small mb-0">By signing up, you agree to our <a href="{% url 'terms' %}"
+                            class="text-pink">Terms & Conditions</a> and <a href="{% url 'privacy' %}"
+                            class="text-pink">Privacy Policy</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
