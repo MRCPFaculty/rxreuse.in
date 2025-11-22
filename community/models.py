@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from .success_models import SuccessStory
+from .contact_models import ContactMessage
 
 class Badge(models.Model):
     name = models.CharField(max_length=100)
