@@ -1,18 +1,75 @@
-<div class="col-md-4">
-    <h2 class="display-4 fw-bold text-pink">10k+</h2>
-    <p class="text-muted">Medicines Donated</p>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="row align-items-center min-vh-75 mb-5">
+    <div class="col-lg-6">
+        <h1 class="display-5 fw-bold mb-4">
+            "<span class="text-transparent bg-clip-text"
+                style="background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; color: transparent;">Where
+                Sharing Becomes Healing</span>"
+        </h1>
+        <p class="lead text-secondary mb-4">
+            <strong class="text-white">RxReuse</strong> is India's premier <strong class="text-white">medicine donation
+                NGO</strong> dedicated to preventing medicine wastage while ensuring affordable healthcare for
+            underprivileged patients.
+        </p>
+        <div class="d-flex gap-3 mb-4">
+            <a href="{% url 'donate_medicine' %}" class="btn btn-primary btn-lg px-5">Donate Medicine</a>
+            <a href="{% url 'apply_for_aid' %}" class="btn btn-outline-light btn-lg px-5">Get Free Medicine</a>
+        </div>
+    </div>
+    <div class="col-lg-6 text-center">
+        <div class="d-flex align-items-center justify-content-center" style="min-height: 400px;">
+            <div class="text-center">
+                <div class="mb-4"
+                    style="font-size: 8rem; line-height: 1; text-shadow: 0 0 40px rgba(238, 85, 134, 0.5);">💊</div>
+                <div class="mb-3"
+                    style="font-size: 6rem; line-height: 1; text-shadow: 0 0 40px rgba(255, 183, 3, 0.5);">❤️</div>
+                <div style="font-size: 8rem; line-height: 1; text-shadow: 0 0 40px rgba(0, 212, 255, 0.5);">🏥</div>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="col-md-4">
-    <h2 class="display-4 fw-bold text-yellow">5k+</h2>
-    <p class="text-muted">Lives Impacted</p>
+
+<!-- About Section -->
+<div class="row mb-5">
+    <div class="col-lg-10 offset-lg-1 text-center">
+        <p class="text-secondary mb-3">
+            Every year, thousands of rupees worth of unused, unexpired medicines go to waste in Indian households, while
+            millions struggle to afford basic treatments. Our <strong class="text-white">free medicine redistribution
+                platform</strong> creates a transparent ecosystem where donors can contribute their surplus medicines,
+            and economically disadvantaged patients can access them at zero cost.
+        </p>
+        <p class="text-secondary">
+            Whether you have leftover antibiotics, chronic disease medications, or over-the-counter drugs, your donation
+            can save lives. Join thousands of compassionate Indians in our mission to make healthcare accessible to all
+            through <strong class="text-white">medicine sharing</strong>.
+        </p>
+    </div>
 </div>
-<div class="col-md-4">
-    <h2 class="display-4 fw-bold text-info">₹0</h2>
-    <p class="text-muted">Cost to Patients</p>
-</div>
-</div>
-</div>
-</div>
+
+<!-- Stats Section -->
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="card bg-dark-glass border-0 p-4">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <h2 class="display-4 fw-bold text-pink">10k+</h2>
+                    <p class="text-muted">Medicines Donated</p>
+                </div>
+                <div class="col-md-4">
+                    <h2 class="display-4 fw-bold text-yellow">5k+</h2>
+                    <p class="text-muted">Lives Impacted</p>
+                </div>
+                <div class="col-md-4">
+                    <h2 class="display-4 fw-bold text-info">₹0</h2>
+                    <p class="text-muted">Cost to Patients</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- How Medicine Donation Works -->
@@ -87,21 +144,17 @@
 
 <!-- CTA Section -->
 <div class="row mb-5">
-    animation: float 6s ease-in-out infinite;
-    }
-
-    @keyframes float {
-    0% {
-    transform: translateY(0px);
-    }
-
-    50% {
-    transform: translateY(-20px);
-    }
-
-    100% {
-    transform: translateY(0px);
-    }
-    }
-    </style>
-    {% endblock %}
+    <div class="col-12 text-center">
+        <div class="card bg-dark-glass border-0 p-5">
+            <h2 class="fw-bold mb-3">Start Your Medicine Donation Journey Today</h2>
+            <p class="lead text-secondary mb-4">
+                Join thousands of compassionate donors across India. Every medicine counts. Every donation matters.
+            </p>
+            <div class="d-flex gap-3 justify-content-center">
+                <a href="{% url 'donate_medicine' %}" class="btn btn-primary btn-lg px-5">Donate Unused Medicine</a>
+                <a href="{% url 'rxedu_home' %}" class="btn btn-outline-light btn-lg px-5">Read Our Blog</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
