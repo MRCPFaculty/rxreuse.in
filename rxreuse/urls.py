@@ -19,6 +19,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
+from community.contact_views import ContactView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,7 +33,7 @@ urlpatterns = [
     
     # Static Pages
     path('about/', TemplateView.as_view(template_name='pages/about.html'), name='about'),
-    path('contact/', TemplateView.as_view(template_name='pages/contact.html'), name='contact'),
+    path('contact/', ContactView.as_view(), name='contact'),
     path('privacy/', TemplateView.as_view(template_name='pages/privacy.html'), name='privacy'),
     path('terms/', TemplateView.as_view(template_name='pages/terms.html'), name='terms'),
     path('refund-policy/', TemplateView.as_view(template_name='pages/refund_policy.html'), name='refund_policy'),
