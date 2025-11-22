@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Volunteer Dashboard</h2>
+<p class="text-muted">Pending Donations needing verification.</p>
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Donor</th>
+                <th>Medicine</th>
+                <th>Images</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for donation in pending_donations %}
+            <tr>
+                <td>{{ donation.donor.email }}</td>
+                <td>
+                    <strong>{{ donation.medicine_name }}</strong><br>
+                    Qty: {{ donation.quantity }}<br>
+                    Exp: {{ donation.expiry_date }}
+                </td>
+                <td>
+                    {% if donation.image_front %}
+                    <a href="{{ donation.image_front.url }}" target="_blank">Front</a> |
+                    {% endif %}
+                    {% if donation.image_back %}
+                    <a href="{{ donation.image_back.url }}" target="_blank">Back</a> |
+                    {% endif %}
+                    {% if donation.image_expiry %}
+                    <a href="{{ donation.image_expiry.url }}" target="_blank">Expiry</a>
+                    {% endif %}
+                </td>
+                <td>
+                    <form method="post" action="{% url 'pre_verify_donation' donation.pk %}" class="d-inline">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="approve">
+                        <button type="submit" class="btn btn-success btn-sm">Approve</button>
+                    </form>
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                        data-bs-target="#rejectModal{{ donation.pk }}">
+                        Reject
+                    </button>
+
+                    <!-- Reject Modal -->
+                    <div class="modal fade" id="rejectModal{{ donation.pk }}" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form method="post" action="{% url 'pre_verify_donation' donation.pk %}">
+                                    {% csrf_token %}
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Reject Donation</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <input type="hidden" name="action" value="reject">
+                                        <textarea name="reason" class="form-control"
+                                            placeholder="Reason for rejection..." required></textarea>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-danger">Confirm Reject</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="text-center">No pending donations. Good job!</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h2>Available Medicines (Free)</h2>
+        <p class="text-muted">These medicines have been donated by generous individuals. You only pay for shipping.</p>
+    </div>
+    <div class="col-md-4 text-end">
+        <a href="{% url 'apply_for_aid' %}" class="btn btn-primary btn-lg">Apply for Aid</a>
+    </div>
+</div>
+
+<div class="row">
+    {% for med in medicines %}
+    <div class="col-md-4 mb-3">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">{{ med.medicine_name }}</h5>
+                <p class="card-text">
+                    <strong>Batch:</strong> {{ med.batch_number }}<br>
+                    <strong>Expiry:</strong> {{ med.expiry_date }}
+                </p>
+            </div>
+            <div class="card-footer bg-transparent">
+                <span class="badge bg-success">Available</span>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <div class="alert alert-warning">No medicines available in stock right now. Please check back later.</div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row mb-5 text-center">
+    <div class="col-12">
+        <h2 class="display-4 fw-bold">Rx<span class="text-pink">Edu</span></h2>
+        <p class="lead text-secondary">Latest insights on healthcare and medicine safety.</p>
+    </div>
+</div>
+
+<div class="row g-4">
+    {% for post in posts %}
+    <div class="col-md-4">
+        <div class="card h-100 border-0 bg-secondary">
+            {% if post.image %}
+            <div class="overflow-hidden" style="border-radius: 16px 16px 0 0;">
+                <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.title }}"
+                    style="height: 200px; object-fit: cover; transition: transform 0.5s;">
+            </div>
+            {% else %}
+            <div class="bg-dark d-flex align-items-center justify-content-center"
+                style="height: 200px; border-radius: 16px 16px 0 0;">
+                <span style="font-size: 3rem;">📰</span>
+            </div>
+            {% endif %}
+
+            <div class="card-body p-4">
+                <div class="mb-2">
+                    <span class="badge bg-dark-glass text-pink border border-secondary">{{ post.published_date|date:"M
+                        d, Y" }}</span>
+                </div>
+                <h5 class="card-title fw-bold mb-3">
+                    <a href="{% url 'blog_detail' post.slug %}"
+                        class="text-white text-decoration-none stretched-link hover-pink">
+                        {{ post.title }}
+                    </a>
+                </h5>
+                <p class="card-text text-secondary">{{ post.content|truncatewords:20 }}</p>
+            </div>
+            <div class="card-footer bg-transparent border-0 p-4 pt-0">
+                <div class="d-flex align-items-center">
+                    <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center text-white fw-bold"
+                        style="width: 32px; height: 32px; font-size: 0.8rem;">
+                        {{ post.author.email|slice:":1"|upper }}
+                    </div>
+                    <small class="ms-2 text-secondary">By {{ post.author.email }}</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12 text-center">
+        <div class="alert alert-info bg-dark-glass border-secondary text-white">No articles published yet.</div>
+    </div>
+    {% endfor %}
+</div>
+
+<style>
+    .card:hover .card-img-top {
+        transform: scale(1.1);
+    }
+
+    .hover-pink:hover {
+        color: var(--accent-pink) !important;
+    }
+</style>
+{% endblock %}

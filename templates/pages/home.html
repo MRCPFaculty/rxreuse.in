@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="row align-items-center min-vh-75 mb-5">
+    <div class="col-lg-6">
+        <h1 class="display-3 fw-bold mb-4">
+            Don't Let Medicine <br>
+            <span class="text-transparent bg-clip-text"
+                style="background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; color: transparent;">Go
+                To Waste.</span>
+        </h1>
+        <p class="lead text-secondary mb-5">
+            Join the movement to redistribute surplus medicines to those who need them most.
+            Safe, transparent, and free.
+        </p>
+        <div class="d-flex gap-3">
+            <a href="{% url 'donate_medicine' %}" class="btn btn-primary btn-lg px-5">Donate Now</a>
+            <a href="{% url 'available_medicines' %}" class="btn btn-outline-light btn-lg px-5">Get Aid</a>
+        </div>
+    </div>
+    <div class="col-lg-6 text-center position-relative">
+        <!-- 3D Illustration Placeholder -->
+        <div class="position-absolute top-50 start-50 translate-middle"
+            style="width: 300px; height: 300px; background: var(--gradient-primary); filter: blur(100px); opacity: 0.3; z-index: -1;">
+        </div>
+        <img src="https://cdn3d.iconscout.com/3d/premium/thumb/medical-kit-3d-icon-download-in-png-blend-fbx-gltf-file-formats--first-aid-box-bag-health-healthcare-user-interface-pack-icons-4963867.png"
+            alt="Medicine Kit 3D" class="img-fluid floating-animation" style="max-height: 500px;">
+    </div>
+</div>
+
+<!-- Stats Section -->
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="card bg-dark-glass border-0 p-4">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <h2 class="display-4 fw-bold text-pink">10k+</h2>
+                    <p class="text-muted">Medicines Donated</p>
+                </div>
+                <div class="col-md-4">
+                    <h2 class="display-4 fw-bold text-yellow">5k+</h2>
+                    <p class="text-muted">Lives Impacted</p>
+                </div>
+                <div class="col-md-4">
+                    <h2 class="display-4 fw-bold text-info">₹0</h2>
+                    <p class="text-muted">Cost to Patients</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- How It Works -->
+<div class="row mb-5">
+    <div class="col-12 text-center mb-5">
+        <h2 class="fw-bold">How It Works</h2>
+        <p class="text-secondary">Simple steps to make a big difference.</p>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 p-4 text-center">
+            <div class="mb-3">
+                <span style="font-size: 3rem;">💊</span>
+            </div>
+            <h4>1. Donate</h4>
+            <p class="text-secondary">Upload details of your unused medicines. We verify safety and expiry.</p>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 p-4 text-center">
+            <div class="mb-3">
+                <span style="font-size: 3rem;">🚚</span>
+            </div>
+            <h4>2. Ship</h4>
+            <p class="text-secondary">Pack the medicines and ship them to our warehouse. Add tracking details.</p>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 p-4 text-center">
+            <div class="mb-3">
+                <span style="font-size: 3rem;">❤️</span>
+            </div>
+            <h4>3. Impact</h4>
+            <p class="text-secondary">Patients apply for aid and receive medicines for free. You save lives.</p>
+        </div>
+    </div>
+</div>
+
+<style>
+    .floating-animation {
+        animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0% {
+            transform: translateY(0px);
+        }
+
+        50% {
+            transform: translateY(-20px);
+        }
+
+        100% {
+            transform: translateY(0px);
+        }
+    }
+</style>
+{% endblock %}

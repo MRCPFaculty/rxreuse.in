@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <h2>My Impact Dashboard</h2>
+        <p class="text-muted">See how your contributions are changing lives.</p>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card bg-primary text-white h-100">
+            <div class="card-body text-center">
+                <h1 class="display-4">{{ my_donations_count }}</h1>
+                <p class="lead">Medicines Donated</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-success text-white h-100">
+            <div class="card-body text-center">
+                <h1 class="display-4">{{ lives_impacted }}</h1>
+                <p class="lead">Lives Impacted (Est.)</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-warning text-dark h-100">
+            <div class="card-body text-center">
+                <h1 class="display-4">{{ my_badges.count }}</h1>
+                <p class="lead">Badges Earned</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <h3>My Badges</h3>
+        <div class="d-flex flex-wrap gap-3">
+            {% for user_badge in my_badges %}
+            <div class="text-center p-3 border rounded">
+                {% if user_badge.badge.icon %}
+                <img src="{{ user_badge.badge.icon.url }}" alt="{{ user_badge.badge.name }}"
+                    style="width: 64px; height: 64px;">
+                {% else %}
+                <div
+                    style="width: 64px; height: 64px; background: #eee; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                    🏆
+                </div>
+                {% endif %}
+                <h6 class="mt-2">{{ user_badge.badge.name }}</h6>
+                <small class="text-muted">{{ user_badge.earned_at|date:"M Y" }}</small>
+            </div>
+            {% empty %}
+            <p class="text-muted">Donate more medicines to earn badges!</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

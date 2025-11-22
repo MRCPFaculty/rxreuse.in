@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>My Aid Applications</h2>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for app in applications %}
+            <tr>
+                <td>#{{ app.id }}</td>
+                <td>{{ app.created_at|date:"M d, Y" }}</td>
+                <td>
+                    <span class="badge 
+                        {% if app.status == 'PENDING' %}bg-warning
+                        {% elif app.status == 'APPROVED' %}bg-info
+                        {% elif app.status == 'DISPATCHED' %}bg-primary
+                        {% elif app.status == 'DELIVERED' %}bg-success
+                        {% else %}bg-secondary{% endif %}">
+                        {{ app.get_status_display }}
+                    </span>
+                </td>
+                <td>
+                    {% if app.status == 'APPROVED' %}
+                    <button class="btn btn-sm btn-success">Pay Shipping</button>
+                    {% elif app.status == 'DISPATCHED' %}
+                    <a href="{{ app.tracking_link }}" target="_blank" class="btn btn-sm btn-outline-primary">Track</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No applications yet. <a href="{% url 'available_medicines' %}">Browse Medicines</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

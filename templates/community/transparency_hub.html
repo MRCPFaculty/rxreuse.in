@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="text-center mb-5">
+    <h1 class="display-4">Transparency Hub</h1>
+    <p class="lead">Real-time statistics of our impact.</p>
+</div>
+
+<div class="row text-center mb-5">
+    <div class="col-md-4">
+        <h2 class="display-3 text-primary">{{ stats.total_donations }}</h2>
+        <p>Total Donations Received</p>
+    </div>
+    <div class="col-md-4">
+        <h2 class="display-3 text-success">{{ stats.medicines_distributed }}</h2>
+        <p>Medicines Distributed</p>
+    </div>
+    <div class="col-md-4">
+        <h2 class="display-3 text-info">{{ stats.lives_impacted }}</h2>
+        <p>Lives Impacted</p>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <h3 class="text-center mb-4">Recent Financial Supporters</h3>
+        <ul class="list-group">
+            {% for donation in recent_donors %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>
+                    {% if donation.donor %}
+                    {{ donation.donor.first_name }} {{ donation.donor.last_name|slice:":1" }}.
+                    {% else %}
+                    Anonymous
+                    {% endif %}
+                </span>
+                <span class="badge bg-primary rounded-pill">₹{{ donation.amount }}</span>
+            </li>
+            {% empty %}
+            <li class="list-group-item text-center text-muted">Be the first to donate!</li>
+            {% endfor %}
+        </ul>
+        <div class="text-center mt-4">
+            <a href="#" class="btn btn-lg btn-outline-success">Donate Money</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
