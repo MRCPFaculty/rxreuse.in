@@ -11,5 +11,5 @@ python manage.py collectstatic --no-input
 # Apply migrations
 python manage.py migrate
 
-# Create superuser automatically
-python init_admin.py
+# Create superuser using management command
+python manage.py initadmin
