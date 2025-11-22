@@ -24,58 +24,103 @@
         content="Where sharing becomes healing. Donate unused medicines and help underprivileged patients access free healthcare across India.">
     <meta property="og:image" content="https://rxreuse-ngo.onrender.com/static/images/og-image.jpg">
 
-    <span style="font-size: 1.5rem;">Rx<span class="text-pink">Reuse</span></span>
-    <span style="font-size: 0.65rem; opacity: 0.8; margin-top: -2px;">Where Sharing Becomes Healing</span>
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto align-items-center">
-            <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'available_medicines' %}">Get Aid</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'donate_medicine' %}">Donate</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'rxedu_home' %}">RxEdu</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'success_stories' %}">Stories</a></li>
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://rxreuse-ngo.onrender.com/">
+    <meta property="twitter:title" content="Medicine Donation India | RxReuse NGO">
+    <meta property="twitter:description"
+        content="Donate unused medicines and help patients access free healthcare. Join India's leading medicine redistribution platform.">
 
-            {% if user.is_authenticated %}
-            <li class="nav-item dropdown ms-3">
-                <a class="nav-link dropdown-toggle btn btn-outline-light px-3 py-1 rounded-pill" href="#" role="button"
-                    data-bs-toggle="dropdown">
-                    {{ user.email }}
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end bg-dark border-secondary">
-                    {% if user.role == 'DONOR' %}
-                    <li><a class="dropdown-item text-light" href="{% url 'donation_list' %}">My Donations</a>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{% static 'css/custom.css' %}" rel="stylesheet">
+
+    <!-- Structured Data (Schema.org) for Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "NGO",
+      "name": "RxReuse",
+      "alternateName": "RxReuse NGO - Where Sharing Becomes Healing",
+      "url": "https://rxreuse-ngo.onrender.com",
+      "description": "India's leading medicine donation NGO connecting surplus medicines with patients in need. 100% transparent, safe, and verified medicine redistribution platform.",
+      "slogan": "Where Sharing Becomes Healing",
+      "email": "contact@rxreuse.in",
+      "telephone": "+91-9876543210",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Mumbai",
+        "addressRegion": "Maharashtra",
+        "postalCode": "400001",
+        "addressCountry": "IN"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "India"
+      },
+      "knowsAbout": ["Medicine Donation", "Healthcare Accessibility", "Pharmaceutical Redistribution", "Patient Aid", "Medical Charity"]
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex flex-column" href="{% url 'home' %}" style="line-height: 1.2;">
+                <span style="font-size: 1.5rem;">Rx<span class="text-pink">Reuse</span></span>
+                <span style="font-size: 0.65rem; opacity: 0.8; margin-top: -2px;">Where Sharing Becomes Healing</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'available_medicines' %}">Get Aid</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'donate_medicine' %}">Donate</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'rxedu_home' %}">RxEdu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'success_stories' %}">Stories</a></li>
+
+                    {% if user.is_authenticated %}
+                    <li class="nav-item dropdown ms-3">
+                        <a class="nav-link dropdown-toggle btn btn-outline-light px-3 py-1 rounded-pill" href="#"
+                            role="button" data-bs-toggle="dropdown">
+                            {{ user.email }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end bg-dark border-secondary">
+                            {% if user.role == 'DONOR' %}
+                            <li><a class="dropdown-item text-light" href="{% url 'donation_list' %}">My Donations</a>
+                            </li>
+                            <li><a class="dropdown-item text-light" href="{% url 'impact_dashboard' %}">Impact
+                                    Dashboard</a></li>
+                            {% elif user.role == 'BENEFICIARY' %}
+                            <li><a class="dropdown-item text-light" href="{% url 'aid_dashboard' %}">My Aid Requests</a>
+                            </li>
+                            {% elif user.role == 'VOLUNTEER' %}
+                            <li><a class="dropdown-item text-light" href="{% url 'volunteer_dashboard' %}">Volunteer
+                                    Dashboard</a></li>
+                            {% endif %}
+                            <li>
+                                <hr class="dropdown-divider bg-secondary">
+                            </li>
+                            <li>
+                                <form method="post" action="{% url 'account_logout' %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="dropdown-item text-danger">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
                     </li>
-                    <li><a class="dropdown-item text-light" href="{% url 'impact_dashboard' %}">Impact
-                            Dashboard</a></li>
-                    {% elif user.role == 'BENEFICIARY' %}
-                    <li><a class="dropdown-item text-light" href="{% url 'aid_dashboard' %}">My Aid Requests</a>
+                    {% else %}
+                    <li class="nav-item ms-3">
+                        <a class="btn btn-primary btn-sm" href="{% url 'account_login' %}">Login / Sign Up</a>
                     </li>
-                    {% elif user.role == 'VOLUNTEER' %}
-                    <li><a class="dropdown-item text-light" href="{% url 'volunteer_dashboard' %}">Volunteer
-                            Dashboard</a></li>
                     {% endif %}
-                    <li>
-                        <hr class="dropdown-divider bg-secondary">
-                    </li>
-                    <li>
-                        <form method="post" action="{% url 'account_logout' %}">
-                            {% csrf_token %}
-                            <button type="submit" class="dropdown-item text-danger">Logout</button>
-                        </form>
-                    </li>
                 </ul>
-            </li>
-            {% else %}
-            <li class="nav-item ms-3">
-                <a class="btn btn-primary btn-sm" href="{% url 'account_login' %}">Login / Sign Up</a>
-            </li>
-            {% endif %}
-        </ul>
-    </div>
-    </div>
+            </div>
+        </div>
     </nav>
 
     <!-- Main Content -->
@@ -126,6 +171,6 @@
 
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+</body>
 
 </html>
