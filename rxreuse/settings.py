@@ -167,3 +167,13 @@ LOGIN_REDIRECT_URL = '/' # Will be overridden by custom adapter
 # Razorpay Settings
 RAZORPAY_KEY_ID = os.getenv('RAZORPAY_KEY_ID', 'rzp_test_1234567890')
 RAZORPAY_KEY_SECRET = os.getenv('RAZORPAY_KEY_SECRET', 'secret_key_here')
+
+# Email Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'rxreuse@gmail.com')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')  # Set in Render environment
+DEFAULT_FROM_EMAIL = 'RxReuse NGO <rxreuse@gmail.com>'
+ADMIN_EMAIL = 'rxreuse@gmail.com'  # Contact form notifications will go here
