@@ -1,67 +1,136 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<div class="row mb-5 text-center">
-    <div class="col-12">
-        <h2 class="display-4 fw-bold">Rx<span class="text-pink">Edu</span></h2>
-        <p class="lead text-secondary">Latest insights on healthcare and medicine safety.</p>
+<!-- Header -->
+<div class="row mb-5">
+    <div class="col-12 text-center">
+        <h1 class="display-4 fw-bold mb-3">Rx<span class="text-pink">Edu</span></h1>
+        <p class="lead text-secondary">Expert insights on healthcare, medicine safety, and donation practices</p>
     </div>
 </div>
 
+<!-- Blog Grid -->
 <div class="row g-4">
     {% for post in posts %}
-    <div class="col-md-4">
-        <div class="card h-100 border-0 bg-secondary">
-            {% if post.image %}
-            <div class="overflow-hidden" style="border-radius: 16px 16px 0 0;">
-                <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.title }}"
-                    style="height: 200px; object-fit: cover; transition: transform 0.5s;">
-            </div>
-            {% else %}
-            <div class="bg-dark d-flex align-items-center justify-content-center"
-                style="height: 200px; border-radius: 16px 16px 0 0;">
-                <span style="font-size: 3rem;">📰</span>
-            </div>
-            {% endif %}
-
-            <div class="card-body p-4">
-                <div class="mb-2">
-                    <span class="badge bg-dark-glass text-pink border border-secondary">{{ post.published_date|date:"M
-                        d, Y" }}</span>
+    <div class="col-lg-4 col-md-6">
+        <article class="blog-card card h-100 border-0"
+            style="background: rgba(255,255,255,0.03); border-radius: 16px; overflow: hidden;">
+            <!-- Featured Image -->
+            <div class="blog-image-wrapper" style="position: relative; overflow: hidden; height: 240px;">
+                {% if post.image %}
+                <img src="{{ post.image.url }}" class="w-100 h-100 blog-image" alt="{{ post.title }}"
+                    style="object-fit: cover; transition: transform 0.5s ease;">
+                {% else %}
+                <div class="d-flex align-items-center justify-content-center h-100"
+                    style="background: linear-gradient(135deg, rgba(238, 85, 134, 0.2), rgba(0, 212, 255, 0.2));">
+                    <span style="font-size: 4rem; opacity: 0.5;">📰</span>
                 </div>
+                {% endif %}
+
+                <!-- Date Badge -->
+                <div style="position: absolute; top: 16px; left: 16px;">
+                    <span class="badge"
+                        style="background: rgba(0,0,0,0.7); backdrop-filter: blur(10px); padding: 8px 16px; border-radius: 20px; font-size: 0.85rem;">
+                        {{ post.published_date|date:"M d, Y" }}
+                    </span>
+                </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="card-body p-4">
                 <h5 class="card-title fw-bold mb-3">
-                    <a href="{% url 'blog_detail' post.slug %}"
-                        class="text-white text-decoration-none stretched-link hover-pink">
+                    <a href="{% url 'blog_detail' post.slug %}" class="text-white text-decoration-none stretched-link"
+                        style="transition: color 0.3s;">
                         {{ post.title }}
                     </a>
                 </h5>
-                <p class="card-text text-secondary">{{ post.content|truncatewords:20 }}</p>
-            </div>
-            <div class="card-footer bg-transparent border-0 p-4 pt-0">
-                <div class="d-flex align-items-center">
-                    <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center text-white fw-bold"
-                        style="width: 32px; height: 32px; font-size: 0.8rem;">
+                <p class="card-text text-secondary mb-3" style="line-height: 1.6;">
+                    {{ post.content|striptags|truncatewords:20 }}
+                </p>
+
+                <!-- Author Info -->
+                <div class="d-flex align-items-center pt-3 border-top border-secondary">
+                    <div class="rounded-circle bg-gradient d-flex align-items-center justify-content-center text-white fw-bold"
+                        style="width: 36px; height: 36px; font-size: 0.9rem; background: var(--gradient-primary);">
                         {{ post.author.email|slice:":1"|upper }}
                     </div>
-                    <small class="ms-2 text-secondary">By {{ post.author.email }}</small>
+                    <div class="ms-3">
+                        <div class="small text-white">{{ post.author.email|truncatechars:20 }}</div>
+                        <div class="small text-secondary">{{ post.published_date|timesince }} ago</div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </article>
     </div>
     {% empty %}
-    <div class="col-12 text-center">
-        <div class="alert alert-info bg-dark-glass border-secondary text-white">No articles published yet.</div>
+    <div class="col-12">
+        <div class="card border-0 p-5 text-center" style="background: rgba(255,255,255,0.03); border-radius: 16px;">
+            <div class="mb-4" style="font-size: 4rem;">📚</div>
+            <h3 class="fw-bold mb-3">No Articles Yet</h3>
+            <p class="text-secondary mb-0">Check back soon for expert insights on medicine donation and healthcare.</p>
+        </div>
     </div>
     {% endfor %}
 </div>
 
+<!-- Pagination (if needed) -->
+{% if posts.has_other_pages %}
+<div class="row mt-5">
+    <div class="col-12">
+        <nav>
+            <ul class="pagination justify-content-center">
+                {% if posts.has_previous %}
+                <li class="page-item">
+                    <a class="page-link bg-dark border-secondary text-white"
+                        href="?page={{ posts.previous_page_number }}">Previous</a>
+                </li>
+                {% endif %}
+
+                {% for num in posts.paginator.page_range %}
+                <li class="page-item {% if posts.number == num %}active{% endif %}">
+                    <a class="page-link bg-dark border-secondary text-white" href="?page={{ num }}">{{ num }}</a>
+                </li>
+                {% endfor %}
+
+                {% if posts.has_next %}
+                <li class="page-item">
+                    <a class="page-link bg-dark border-secondary text-white"
+                        href="?page={{ posts.next_page_number }}">Next</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endif %}
+
 <style>
-    .card:hover .card-img-top {
+    .blog-card:hover .blog-image {
         transform: scale(1.1);
     }
 
-    .hover-pink:hover {
+    .blog-card:hover .card-title a {
         color: var(--accent-pink) !important;
+    }
+
+    .blog-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .blog-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(238, 85, 134, 0.2);
+    }
+
+    .pagination .page-item.active .page-link {
+        background: var(--gradient-primary) !important;
+        border-color: var(--accent-pink) !important;
+    }
+
+    .pagination .page-link:hover {
+        background: rgba(238, 85, 134, 0.2) !important;
+        border-color: var(--accent-pink) !important;
     }
 </style>
 {% endblock %}
