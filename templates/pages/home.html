@@ -125,37 +125,21 @@
 
 <!-- CTA Section -->
 <div class="row mb-5">
-    <div class="col-12 text-center">
-        <div class="card bg-dark-glass border-0 p-5">
-            <h2 class="fw-bold mb-3">Start Your Medicine Donation Journey Today</h2>
-            <p class="lead text-secondary mb-4">
-                Join thousands of compassionate donors across India. Every medicine counts. Every donation matters.
-            </p>
-            <div class="d-flex gap-3 justify-content-center">
-                <a href="{% url 'donate_medicine' %}" class="btn btn-primary btn-lg px-5">Donate Unused Medicine</a>
-                <a href="{% url 'about' %}" class="btn btn-outline-light btn-lg px-5">Learn More</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<style>
-    .floating-animation {
-        animation: float 6s ease-in-out infinite;
+    animation: float 6s ease-in-out infinite;
     }
 
     @keyframes float {
-        0% {
-            transform: translateY(0px);
-        }
-
-        50% {
-            transform: translateY(-20px);
-        }
-
-        100% {
-            transform: translateY(0px);
-        }
+    0% {
+    transform: translateY(0px);
     }
-</style>
-{% endblock %}
+
+    50% {
+    transform: translateY(-20px);
+    }
+
+    100% {
+    transform: translateY(0px);
+    }
+    }
+    </style>
+    {% endblock %}
