@@ -1,22 +1,134 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-    <h1 class="display-4 text-center mb-4">About RxReuse</h1>
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <p class="lead">RxReuse is a non-profit initiative dedicated to bridging the gap between surplus medicines
-                and patients in need.</p>
-            <p>Our mission is to ensure that no medicine goes to waste while someone, somewhere, is struggling to afford
-                their prescription.</p>
+<div class="row">
+    <div class="col-12">
+        <!-- Hero Section -->
+        <div class="text-center mb-5 pb-5">
+            <h1 class="display-3 fw-bold mb-3">About RxReuse</h1>
+            <p class="lead text-secondary col-lg-8 mx-auto">We're on a mission to make healthcare accessible by bridging
+                the gap between surplus medicines and those in need.</p>
+        </div>
 
-            <h3>How We Work</h3>
-            <ul>
-                <li><strong>Donors</strong> ship their unused, unexpired medicines to our warehouse.</li>
-                <li><strong>Volunteers</strong> verify the quality and safety of every donation.</li>
-                <li><strong>Patients</strong> apply for aid and receive medicines for free, paying only for shipping.
-                </li>
-            </ul>
+        <!-- Mission Section -->
+        <div class="row align-items-center mb-5 pb-5">
+            <div class="col-lg-6 mb-4">
+                <div class="p-4">
+                    <span class="badge bg-pink mb-3 px-3 py-2">Our Mission</span>
+                    <h2 class="fw-bold mb-4">Where Sharing Becomes Healing</h2>
+                    <p class="text-secondary mb-3">
+                        RxReuse is India's premier medicine donation NGO dedicated to preventing medicine wastage while
+                        ensuring affordable healthcare for underprivileged patients.
+                    </p>
+                    <p class="text-secondary mb-3">
+                        Every year, thousands of rupees worth of unused, unexpired medicines go to waste in Indian
+                        households, while millions struggle to afford basic treatments. We create a transparent
+                        ecosystem connecting donors with patients in need.
+                    </p>
+                    <p class="text-secondary">
+                        Through rigorous volunteer verification and a transparent tracking system, we ensure every
+                        donated medicine reaches genuine patients safely and efficiently.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card p-5 text-center" style="background: var(--gradient-primary);">
+                    <div class="row text-white">
+                        <div class="col-md-6 mb-4">
+                            <h2 class="display-4 fw-bold">10k+</h2>
+                            <p class="mb-0">Medicines Donated</p>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <h2 class="display-4 fw-bold">5k+</h2>
+                            <p class="mb-0">Lives Impacted</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h2 class="display-4 fw-bold">₹50L+</h2>
+                            <p class="mb-0">Value Redistributed</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h2 class="display-4 fw-bold">100%</h2>
+                            <p class="mb-0">Transparent Process</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- How We Work -->
+        <div class="mb-5 pb-5">
+            <div class="text-center mb-5">
+                <span class="badge bg-yellow text-dark mb-3 px-3 py-2">How We Work</span>
+                <h2 class="fw-bold">Our Three-Step Process</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card p-4 text-center h-100">
+                        <div class="mb-3"><span style="font-size: 3rem;">💊</span></div>
+                        <h4 class="fw-bold mb-3">Collect</h4>
+                        <p class="text-secondary">Donors register their surplus medicines online. Our volunteers verify
+                            authenticity, expiry dates, and packaging integrity.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card p-4 text-center h-100">
+                        <div class="mb-3"><span style="font-size: 3rem;">✓</span></div>
+                        <h4 class="fw-bold mb-3">Verify</h4>
+                        <p class="text-secondary">Trained volunteers inspect every donation to ensure only safe, genuine
+                            medicines enter our inventory for distribution.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card p-4 text-center h-100">
+                        <div class="mb-3"><span style="font-size: 3rem;">❤️</span></div>
+                        <h4 class="fw-bold mb-3">Distribute</h4>
+                        <p class="text-secondary">Verified patients with prescriptions receive medicines completely
+                            free, paying only minimal shipping charges.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Values -->
+        <div class="card p-5 mb-5">
+            <div class="text-center mb-5">
+                <span class="badge bg-info text-dark mb-3 px-3 py-2">Our Values</span>
+                <h2 class="fw-bold">What Drives Us</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-3 mb-4 text-center">
+                    <div class="mb-3"><span style="font-size: 2.5rem;">🎯</span></div>
+                    <h5 class="fw-bold">Transparency</h5>
+                    <p class="text-secondary small">Every donation is tracked and verified</p>
+                </div>
+                <div class="col-md-3 mb-4 text-center">
+                    <div class="mb-3"><span style="font-size: 2.5rem;">🤝</span></div>
+                    <h5 class="fw-bold">Integrity</h5>
+                    <p class="text-secondary small">Honest operations, genuine impact</p>
+                </div>
+                <div class="col-md-3 mb-4 text-center">
+                    <div class="mb-3"><span style="font-size: 2.5rem;">💚</span></div>
+                    <h5 class="fw-bold">Compassion</h5>
+                    <p class="text-secondary small">Driven by empathy for those in need</p>
+                </div>
+                <div class="col-md-3 mb-4 text-center">
+                    <div class="mb-3"><span style="font-size: 2.5rem;">🌍</span></div>
+                    <h5 class="fw-bold">Sustainability</h5>
+                    <p class="text-secondary small">Eco-friendly medicine redistribution</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="card p-5 text-center" style="background: var(--gradient-primary);">
+            <h2 class="fw-bold text-white mb-3">Join Our Movement</h2>
+            <p class="text-white mb-4">Be part of India's healthcare revolution. Donate medicines or request aid today.
+            </p>
+            <div class="d-flex gap-3 justify-content-center">
+                <a href="{% url 'donate_medicine' %}" class="btn btn-light btn-lg px-5">Donate Medicines</a>
+                <a href="{% url 'available_medicines' %}" class="btn btn-outline-light btn-lg px-5">Get Free
+                    Medicine</a>
+            </div>
         </div>
     </div>
 </div>

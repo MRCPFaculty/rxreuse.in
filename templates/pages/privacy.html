@@ -1,14 +1,94 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-    <h1>Privacy Policy</h1>
-    <p>Last updated: November 2025</p>
-    <p>Your privacy is important to us. This policy explains how we handle your data.</p>
-    <h3>1. Data Collection</h3>
-    <p>We collect your name, contact details, and medical documents (for aid applicants) solely for the purpose of
-        facilitating medicine distribution.</p>
-    <h3>2. Data Usage</h3>
-    <p>We do not sell your data. We only share shipping details with our logistics partners.</p>
+<div class="row justify-content-center">
+    <div class="col-lg-9">
+        <div class="mb-5">
+            <h1 class="display-4 fw-bold mb-3">Privacy Policy</h1>
+            <p class="text-secondary">Last updated: November 22, 2025</p>
+        </div>
+
+        <div class="card p-5 mb-4">
+            <h3 class="fw-bold mb-4">Introduction</h3>
+            <p class="text-secondary">
+                RxReuse NGO ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains
+                how we collect, use, disclose, and safeguard your information when you use our medicine donation
+                platform.
+            </p>
+        </div>
+
+        <div class="card p-5 mb-4">
+            <h3 class="fw-bold mb-4">Information We Collect</h3>
+            <h5 class="fw-bold mt-4 mb-3">Personal Information</h5>
+            <ul class="text-secondary">
+                <li class="mb-2">Name and email address</li>
+                <li class="mb-2">Phone number (for verification)</li>
+                <li class="mb-2">Shipping address (for medicine delivery)</li>
+                <li class="mb-2">Medical prescriptions (for beneficiaries)</li>
+                <li class="mb-2">Income proof documents (for aid applicants)</li>
+            </ul>
+            <h5 class="fw-bold mt-4 mb-3">Donation Information</h5>
+            <ul class="text-secondary">
+                <li class="mb-2">Medicine details (name, quantity, expiry date)</li>
+                <li class="mb-2">Photos of medicine packaging</li>
+                <li class="mb-2">Donation tracking information</li>
+            </ul>
+        </div>
+
+        <div class="card p-5 mb-4">
+            <h3 class="fw-bold mb-4">How We Use Your Information</h3>
+            <ul class="text-secondary">
+                <li class="mb-2">To process and verify medicine donations</li>
+                <li class="mb-2">To match donated medicines with patient requests</li>
+                <li class="mb-2">To facilitate shipping and delivery</li>
+                <li class="mb-2">To verify patient eligibility for free medicines</li>
+                <li class="mb-2">To communicate updates about your donations or requests</li>
+                <li class="mb-2">To maintain platform security and prevent fraud</li>
+                <li class="mb-2">To improve our services and user experience</li>
+            </ul>
+        </div>
+
+        <div class="card p-5 mb-4">
+            <h3 class="fw-bold mb-4">Data Security</h3>
+            <p class="text-secondary">
+                We implement appropriate technical and organizational security measures to protect your personal
+                information against unauthorized access, alteration, disclosure, or destruction. However, no method of
+                transmission over the Internet is 100% secure.
+            </p>
+        </div>
+
+        <div class="card p-5 mb-4">
+            <h3 class="fw-bold mb-4">Information Sharing</h3>
+            <p class="text-secondary mb-3">We do not sell your personal information. We may share information with:</p>
+            <ul class="text-secondary">
+                <li class="mb-2"><strong>Verified volunteers</strong>: To inspect and verify donations</li>
+                <li class="mb-2"><strong>Shipping partners</strong>: To facilitate medicine delivery</li>
+                <li class="mb-2"><strong>Payment processors</strong>: For shipping fee transactions</li>
+                <li class="mb-2"><strong>Legal authorities</strong>: When required by law</li>
+            </ul>
+        </div>
+
+        <div class="card p-5 mb-4">
+            <h3 class="fw-bold mb-4">Your Rights</h3>
+            <ul class="text-secondary">
+                <li class="mb-2">Access your personal data</li>
+                <li class="mb-2">Request correction of inaccurate data</li>
+                <li class="mb-2">Request deletion of your data</li>
+                <li class="mb-2">Opt-out of marketing communications</li>
+                <li class="mb-2">Data portability</li>
+            </ul>
+        </div>
+
+        <div class="card p-5 mb-4">
+            <h3 class="fw-bold mb-4">Contact Us</h3>
+            <p class="text-secondary">
+                If you have questions about this Privacy Policy, please contact us at:
+            </p>
+            <p class="text-white mb-0">
+                <strong>Email:</strong> privacy@rxreuse.in<br>
+                <strong>Phone:</strong> +91 98765 43210
+            </p>
+        </div>
+    </div>
 </div>
 {% endblock %}
