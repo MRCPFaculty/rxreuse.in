@@ -6,8 +6,8 @@ django.setup()
 
 from users.models import User
 
-if not User.objects.filter(email='admin@rxreuse.org').exists():
-    User.objects.create_superuser('admin@rxreuse.org', 'admin123')
-    print('Superuser created: admin@rxreuse.org / admin123')
+if not User.objects.filter(email='admin@rxreuse.in').exists():
+    User.objects.create_superuser('admin@rxreuse.in', 'Admin@2025')
+    print('Superuser created: admin@rxreuse.in / Admin@2025')
 else:
     print('Superuser already exists')
