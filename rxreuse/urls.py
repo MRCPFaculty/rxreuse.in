@@ -28,7 +28,6 @@ urlpatterns = [
     path('aid/', include('aid.urls')),
     path('rxedu/', include('rxedu.urls')),
     path('community/', include('community.urls')),
-    path('community/', include('community.urls')),
     path('users/', include('users.urls')),
     
     # Static Pages
