@@ -6,5 +6,4 @@ from .contact_admin import ContactMessageAdmin
 admin.site.register(UserBadge)
 admin.site.register(PlatformStats)
 admin.site.register(MonetaryDonation)
-admin.site.register(ContactMessage, ContactMessageAdmin)
 admin.site.register(SuccessStory)
